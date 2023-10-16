@@ -1,9 +1,10 @@
-from fastapi import FastAPI, APIRouter, Depends
+from fastapi import FastAPI, APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 from db_config import SessionLocal
 from db_models.ai_model import AIModel
 from pydantic_models.ai_models import CreateModelInput, DeleteModelResponse, ModelResponse
 from resolvers import models_crud
+from typing import List
 
 app = FastAPI()
 router = APIRouter()
@@ -21,8 +22,16 @@ def root():
     return {"Hello": "World"}
 
 @router.get("/models/{id}", response_model=ModelResponse)
-def model(id: str, db: Session = Depends(get_db)) -> AIModel:
-    return models_crud.read_model(db, id)
+def get_model(id: str, db: Session = Depends(get_db)) -> AIModel:
+    return models_crud.get_model(db, id)
+
+@router.get("/models", response_model=List[ModelResponse])
+def get_models(
+    first: int = Query(10), 
+    after: int = Query(0), 
+    db: Session = Depends(get_db)
+) -> List[AIModel]:
+    return models_crud.get_models(db, first, after)
 
 @router.post("/model/", response_model=ModelResponse)
 def create_model(
