@@ -10,7 +10,8 @@ def get_model(db: Session, id: str) -> AIModel:
     return db_model
 
 def get_models(db: Session, first: int, after: int) -> List[AIModel]:
-    db_model = db.query(AIModel).offset(after).limit(first).all()
+    db_models = db.query(AIModel).offset(after).limit(first).all()
+    return db_models
 
 def create_model(db: Session, model: AIModel) -> AIModel:
     db.add(model)
