@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from datetime import datetime
+from datetime import date, datetime
 from typing import Optional
 from enum import Enum
 
@@ -14,7 +14,7 @@ class ModelResponse(BaseModel):
     name: Optional[str]
     description: Optional[str]
     num_parameters: Optional[int]
-    release_date: Optional[datetime.date]
+    release_date: Optional[date]
     architecture: Optional[str]
     license: Optional[str]
     developed_by: Optional[str]
