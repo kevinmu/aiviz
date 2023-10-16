@@ -21,7 +21,7 @@ def root():
     return {"Hello": "World"}
 
 @router.get("/models/{id}", response_model=ModelResponse)
-def model(id: int, db: Session = Depends(get_db)) -> AIModel:
+def model(id: str, db: Session = Depends(get_db)) -> AIModel:
     return models_crud.read_model(db, id)
 
 @router.post("/model/", response_model=ModelResponse)
