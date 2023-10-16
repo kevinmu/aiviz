@@ -2,7 +2,7 @@ from fastapi import FastAPI, APIRouter, Depends
 from sqlalchemy.orm import Session
 from db_config import SessionLocal
 from db_models import AIModel
-from models import CreateModelInput, DeleteModelResponse
+from pydantic_models import CreateModelInput, DeleteModelResponse, ModelResponse
 from resolvers import models_crud
 
 app = FastAPI()
@@ -20,11 +20,11 @@ def get_db():
 def root():
     return {"Hello": "World"}
 
-@router.get("/models/{id}", response_model=AIModel)
+@router.get("/models/{id}", response_model=ModelResponse)
 def model(id: int, db: Session = Depends(get_db)) -> AIModel:
     return models_crud.read_model(db, id)
 
-@router.post("/model/", response_model=AIModel)
+@router.post("/model/", response_model=ModelResponse)
 def create_model(
     model: CreateModelInput, 
     db: Session = Depends(get_db)
