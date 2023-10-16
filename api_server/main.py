@@ -1,8 +1,8 @@
 from fastapi import FastAPI, APIRouter, Depends
 from sqlalchemy.orm import Session
 from db_config import SessionLocal
-from db_models import AIModel
-from pydantic_models import CreateModelInput, DeleteModelResponse, ModelResponse
+from db_models.ai_model import AIModel
+from pydantic_models.ai_models import CreateModelInput, DeleteModelResponse, ModelResponse
 from resolvers import models_crud
 
 app = FastAPI()
