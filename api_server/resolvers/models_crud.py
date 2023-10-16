@@ -1,6 +1,6 @@
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
-from db_models import AIModel
+from db_models.ai_model import AIModel
 
 def read_model(db: Session, id: str) -> AIModel:
     db_model = db.query(AIModel).filter(AIModel.id == id).first()
