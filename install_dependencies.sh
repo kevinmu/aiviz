@@ -4,5 +4,6 @@ sudo apt-get install -y git pkg-config libmysqlclient-dev
 
 
 sudo apt install -y npm
-npx create-next-app aiviz_ui
+sudo apt-get install nodejs
+npm install next@latest react@latest react-dom@latest
 npm install axios
